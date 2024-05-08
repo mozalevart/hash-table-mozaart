@@ -1,0 +1,133 @@
+//template <typename T>
+//int h(const T& key) {
+//    const double phi = (sqrt(5) - 1) / 2;
+//    int hash = 0;
+//    const char* data = reinterpret_cast<const char*>(&key);
+//    for (size_t i = 0; i < sizeof(T); i++) {
+//        hash += static_cast<int>(data[i]); // Простое преобразование байтов в int и их суммирование
+//    }
+//    return floor(m * (hash * phi - floor(hash * phi)));
+//}
+
+//template <typename T>
+//    int h(const T& key) {
+//        const double phi = (sqrt(5) - 1) / 2;
+//        const size_t prime = 31; // Простое число для уменьшения коллизий
+//
+//        size_t s = 0;
+//        const char* data = reinterpret_cast<const char*>(&key);
+//        for (size_t i = 0; i < sizeof(T); i++) {
+//            s = ((s * prime) + static_cast<size_t>(data[i])); // Комбинирование хэшей байтов
+//        }
+//        s = floor(m * (s * phi - floor(s * phi)));
+//        true;
+//        return s;
+//    }
+
+
+//template <typename T>
+//int h(const T& key) {
+//    ostringstream oss;
+//    oss << key;
+//    string strKey = oss.str(); // Преобразуем ключ в строку
+//
+//    const double phi = (sqrt(5) - 1) / 2; // Золотое сечение
+//    int hashValue = 0;
+//
+//    for (char c : strKey) {
+//        hashValue += static_cast<int>(c); // Добавляем байтовое представление каждого символа
+//    }
+//
+//    // Применяем формулу хеширования
+//    hashValue = static_cast<int>(m * (fmod(hashValue * phi, 1)));
+//
+//    return hashValue;
+//}
+
+
+//template<typename KeyType, typename ValueType>
+//struct HashTable {
+//    KeyType* key;
+//    ValueType* value;
+//    int count;
+//
+//    HashTable() {
+//        key = new KeyType[m];
+//        value = new ValueType[m];
+//        count = 0;
+//        for (int i = 0; i < m; ++i) {
+//            key[i] = KeyType(); // Инициализируем ключи значением по умолчанию
+//            value[i] = ValueType(); // Аналогично для значений
+//        }
+//    }
+//
+//    ~HashTable() {
+//        delete[] key;
+//        delete[] value;
+//    }
+//
+//    void add_change(const KeyType& k, const ValueType& v) {
+//        int i = h(k);
+//        while ((key[i] != KeyType() && key[i] != k) && i < m) i++; 
+//        if (key[i] == KeyType()) count++; 
+//        key[i] = k;
+//        value[i] = v;
+//    }
+//
+//    bool find(const KeyType& k, ValueType& v) {
+//        int i = h(k);
+//        while ((key[i] != k && key[i] != KeyType()) && i < m) i++; // Поиск элемента
+//        if (key[i] == k) {
+//            v = value[i];
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    void remove(const KeyType& k) {
+//        int i = h(k);
+//        while ((key[i] != k && key[i] != KeyType()) && i < m) i++;
+//        if (i == m) return;
+//        if (key[i] == KeyType()) return;
+//        if (key[i + 1] == KeyType() || i + 1 == m) {
+//            if (key[i] == k) count--;
+//            key[i] = KeyType();
+//            value[i] = ValueType(); 
+//            return;
+//        }
+//        int j = i+1;
+//        while (j < m && key[j] != KeyType() && !(h(key[j]) != j && h(key[j]) <= i)) j++;
+//        if (j == m) {
+//            key[i] = KeyType();
+//            value[i] = ValueType();
+//            return;
+//        }
+//        if (h(key[j]) != j && h(key[j]) <= i) {
+//            count--;
+//                
+//            KeyType nk = key[j];
+//            ValueType nv = value[j];
+//            remove(key[j]);
+//            key[i] = nk;
+//            value[i] = nv;
+//        }
+//        else {
+//            if (key[i] == k) count--;
+//            key[i] = KeyType();
+//            value[i] = ValueType();
+//        }
+//        
+//    }
+//
+//    void printTable() {
+//        cout << "| Index | Key | Value |" << endl;
+//        for (int i = 0; i < m; ++i) {
+//            if (key[i] != KeyType()) { // Проверяем, не является ли текущая ячейка пустой
+//                cout << "| " << i << " | " << key[i] <<"(" << h(key[i]) << ")" << " | " << value[i] << " |" << endl;
+//            }
+//        }
+//    }
+//
+//
+//
+//};
